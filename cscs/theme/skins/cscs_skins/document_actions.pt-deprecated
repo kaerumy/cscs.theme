@@ -1,0 +1,72 @@
+<span metal:define-macro="document_actions"
+     class="documentActions" style="z-index:100px"
+     tal:define="document_actions actions/document_actions|nothing;
+                 getIconFor nocall:putils/getIconFor">
+
+  <div align="right" tal:condition="document_actions">
+    <tal:repeat tal:repeat="action python:here.plonifyActions(template_id=template_id, actions=actions)">
+      <tal:define tal:define="action_id action/id">
+        <tal:edit_and_delete tal:condition="python:action_id == 'edit'">
+          <!-- Edit -->
+          &nbsp;
+          <a href=""
+             class="cscs_icon"
+             tal:attributes="href string:$here_url/base_edit">
+             <img src="edit.gif"/>
+          </a>&nbsp;
+          <!-- Delete -->
+          &nbsp;
+          <a href=""
+             class="cscs_icon"
+             tal:attributes="href string:$here_url/delete_this_object?obj=${here/id}">
+             <img src="delete_icon.gif"/>
+          </a>&nbsp;
+        </tal:edit_and_delete>
+
+        <!-- Mail To -->
+        <tal:sendto tal:condition="python:id == 'sendto'">
+          &nbsp;
+          <a href="" 
+             class="cscs_icon"
+             tal:attributes="href daction/url">
+             <img src="mail_icon.gif"/></a>&nbsp;
+        </tal:sendto>
+
+        <!-- Print -->
+        <tal:print tal:condition="python:id == 'print'">
+          &nbsp;
+          <a href="" 
+             class="cscs_icon"
+             tal:attributes="href daction/url">
+             <img src="print_icon.gif"/></a>&nbsp;
+        </tal:print>
+      </tal:define>
+    </tal:repeat>
+
+    <br/><br/>
+
+    <!-- Workflow State -->
+    <tal:states tal:define="review_state wf_state;
+                            transitions python:wtool.getTransitionsFor(here)"
+          tal:condition="python:review_state">
+
+      Current State: <b tal:content="python:str(review_state).title()"/> 
+
+      <span tal:condition="transitions">
+        <tal:block repeat="transition transitions">
+          <span tal:define="t_id transition/id"
+                tal:condition="python:t_id not in ['cscshidet']">
+            | 
+            <a href="#"
+               class="right_head"
+               tal:content="transition/name"
+               tal:attributes="href string:$here_url/content_status_modify?workflow_action=$t_id;
+                               title transition/name">File Menu Item 1</a>
+          </span>
+         </tal:block>
+         <br/><br/>
+      </span>
+    </tal:states>
+
+  </div>
+</span>

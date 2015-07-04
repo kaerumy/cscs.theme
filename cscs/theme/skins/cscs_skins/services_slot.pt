@@ -1,0 +1,63 @@
+<div metal:define-macro="portlet">
+
+<!-- Library Services -->
+<span tal:condition="here/getLibraryServices|nothing">
+<table width="50%" border="0" align="left" cellpadding="0" cellspacing="0"
+       tal:define="obj python:here.getLibraryServices()[0]">
+<tr>
+<td width="8" align="left" valign="top" class="box_green_bg"><img src="images/box_green_left.gif" alt="cscs_002"></td>
+<td colspan="3" align="left" valign="middle" class="box_green_bg">
+  <span class="bodytext_1">
+    <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="head_2" tal:content="obj/Title|nothing"/>
+    <img src="images/arrow_02.gif" alt="cscs_002" width="8" height="7">
+  </span>
+</td>
+<td width="4">&nbsp;</td>
+</tr>
+<tr>
+<td width="8" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="8" height="1" align="top"></td>
+<td align="left" valign="top">
+  <br/><div tal:define="image obj/getImage|nothing"
+            tal:content="structure python:here.cropImage(image)"/><br/>
+</td>
+<td width="4">&nbsp;</td>
+<td align="left" valign="top"><div align="left" style="padding:10px">
+<span class="bodytext_1" tal:content="obj/getShortDescription|nothing"/>
+</div></td>
+<td width="4">&nbsp;</td>
+</tr>
+<tr><td height="8">&nbsp;</td></tr>
+</table>
+</span>
+
+<!-- Media Services -->
+<span tal:condition="here/getMediaServices|nothing">
+<table width="50%" border="0" align="left" cellpadding="0" cellspacing="0"
+       tal:define="obj python:here.getMediaServices()[0]">
+<tr>
+<td width="8" align="left" valign="top" class="box_green_bg"><img src="images/box_green_left.gif" alt="cscs_002"></td>
+<td colspan="3" align="left" valign="middle" class="box_green_bg">
+  <span class="bodytext_1">
+    <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="head_2" tal:content="obj/Title|nothing"/>
+    <img src="images/arrow_02.gif" alt="cscs_002" width="8" height="7">
+  </span>
+</td>
+<td width="4">&nbsp;</td>
+</tr>
+<tr>
+<td width="8" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="8" height="1" align="top"></td>
+<td align="left" valign="top">
+  <br/><div tal:define="image obj/getImage|nothing"
+            tal:content="structure python:here.cropImage(image)"/><br/>
+</td>
+<td width="4">&nbsp;</td>
+<td align="left" valign="top"><div align="left" style="padding:10px">
+<span class="bodytext_1" tal:content="obj/getShortDescription|nothing"/>
+</div></td>
+<td width="4">&nbsp;</td>
+</tr>
+<tr><td height="8">&nbsp;</td></tr>
+</table>
+</span>
+
+</div>

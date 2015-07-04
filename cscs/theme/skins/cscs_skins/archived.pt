@@ -1,0 +1,103 @@
+<html metal:use-macro="here/main_template/macros/master">
+
+    <metal:fill fill-slot="main">
+      <div tal:define="academic_courses python:here.getCoursesFolderItems(archive=True);
+                       announcements python:here.getAnnouncementsItems(archive=True);
+                       databoxs python:here.getDataBoxItems(archive=True);
+                       events python:here.getEventsItems(archive=True);
+                       faqs python:here.getFAQsItems(archive=True);
+                       fellowships python:here.getFellowshipsItems(archive=True);
+                       irps python:here.getIRPItems(archive=True);
+                       library_services python:here.getLibraryServices(archive=True);
+                       media_services python:here.getMediaServices(archive=True);
+                       publications python:here.getPublicationsItems(archive=True);">
+
+        <div class="head_1">
+          Archived Items
+        </div>
+
+        <div tal:condition="academic_courses">
+          <span class="head_1">Academic Courses</span><hr/>
+          <div tal:repeat="obj academic_courses">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="announcements">
+          <span class="head_1">Announcements</span><hr/>
+          <div tal:repeat="obj announcements">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="databoxs">
+          <span class="head_1">Databox</span><hr/>
+          <div tal:repeat="obj databoxs">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="events">
+          <span class="head_1">Events</span><hr/>
+          <div tal:repeat="obj events">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="faqs">
+          <span class="head_1">Faqs</span><hr/>
+          <div tal:repeat="obj faqs">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="fellowships">
+          <span class="head_1">Fellowships</span><hr/>
+          <div tal:repeat="obj fellowships">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="irps">
+          <span class="head_1">IRPs</span><hr/>
+          <div tal:repeat="obj irps">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="library_services">
+          <span class="head_1">Library Services</span><hr/>
+          <div tal:repeat="obj library_services">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="media_services">
+          <span class="head_1">Media Services</span><hr/>
+          <div tal:repeat="obj media_services">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+        <div tal:condition="publications">
+          <span class="head_1">Publications</span><hr/>
+          <div tal:repeat="obj publications">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+            <b tal:content="obj/getShortDescription|nothing"/><br/>
+          </div>
+        </div>
+
+
+      </div>
+    </metal:fill>
+
+</html>

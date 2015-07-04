@@ -1,0 +1,83 @@
+<div metal:define-macro="portlet">
+
+<table width="100%" border="0" align="left" cellpadding="0" cellspacing="0"
+       tal:define="events here/getLatestEventsItems|nothing;
+                   announcements here/getLatestAnnouncementsItems|nothing;
+                   publications here/getLatestPublicationsItems|nothing">
+<tr>
+<td width="40" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="40" height="4" align="top"></td>
+<td width="132" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="132" height="4" align="top"></td>
+<td width="120" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="120" height="4" align="top"></td>
+<td width="30" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="30" height="4" align="top"></td>
+</tr>
+
+<span tal:condition="events">
+<tr>
+<td width="40" align="right" valign="bottom" class="right_bg"><img src="images/ico_events.gif" alt="cscs_002" width="36" height="24"></td>
+<td align="left" valign="middle" class="right_bg"><span class="bodytext_1">
+<a href="#" tal:attributes="href string:${here/portal_url}/events_folder" target="_self" class="right_head" tal:content="string:Events"/>&nbsp;<img src="images/arrow_01.gif" alt="cscs_001" width="8" height="7"></span></td>
+<td colspan="2" align="left" valign="top" class="right_bg"><img src="images/right_panel_crv1.gif" alt="cscs_002" align="top"></td>
+</tr>
+<span tal:repeat="event events">
+<tr>
+<td width="40" align="right" valign="bottom"><img src="images/spacer.gif" alt="cscs_001" width="30" height="1" align="top"></td>
+<td colspan="2" align="left" valign="top"><div align="justify"><span class="bodytext_1"><img src="images/spacer.gif" alt="cscs_001" width="1" height="11" align="top"><br>
+<a class="item_title"
+   tal:attributes="href python:'/'.join(event.getPhysicalPath())"
+   tal:content="event/Title|nothing"/>
+  <div tal:content="event/getShortDescription|nothing"/>
+</span></div></td>
+<td width="30" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="30" height="1" align="top"></td>
+</tr>
+</span>
+<tr><td colpspan=2><br/></td></tr>
+</span>
+
+<span tal:condition="announcements">
+<tr>
+<td width="40" align="right" valign="bottom" class="right_bg"><img src="images/ico_announcement.gif" alt="cscs_002" width="36" height="25"></td>
+<td align="left" valign="middle" class="right_bg"><span class="bodytext_1">
+<a href="#" tal:attributes="href string:${here/portal_url}/announcements_folder" target="_self" class="right_head" tal:content="string:Announcements"/>
+&nbsp;<img src="images/arrow_01.gif" alt="cscs_001" width="8" height="7"></span></td>
+<td colspan="2" align="left" valign="top" class="right_bg"><img src="images/right_panel_crv1.gif" alt="cscs_002" align="top"></td>
+</tr>
+<span tal:repeat="announcement announcements">
+<tr>
+<td width="40" align="right" valign="bottom"><img src="images/spacer.gif" alt="cscs_001" width="30" height="1" align="top"></td>
+<td colspan="2" align="left" valign="top"><div align="justify"><span class="bodytext_1"><img src="images/spacer.gif" alt="cscs_001" width="1" height="11" align="top"><br>
+<a class="item_title"
+   tal:attributes="href python:'/'.join(announcement.getPhysicalPath())"
+   tal:content="announcement/Title|nothing"/>
+<div tal:content="announcement/getShortDescription|nothing"/>
+</span></div></td>
+<td width="30" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="30" height="1" align="top"></td>
+</tr>
+</span>
+<tr><td colpspan=2><br/></td></tr>
+</span>
+
+<span tal:condition="publications">
+<tr>
+<td width="40" align="right" valign="bottom" class="right_bg"><img src="images/ico_new_publications.gif" alt="cscs_002" width="36" height="27"></td>
+<td align="left" valign="middle" class="right_bg"><span class="bodytext_1">
+<a href="#" tal:attributes="href string:${here/portal_url}/publications_folder" target="_self" class="right_head" tal:content="string:Publications"/>
+&nbsp;<img src="images/arrow_01.gif" alt="cscs_001" width="8" height="7"></span></td>
+<td colspan="2" align="left" valign="top" class="right_bg"><img src="images/right_panel_crv1.gif" alt="cscs_002" align="top"></td>
+</tr>
+<span tal:repeat="publication publications">
+<tr>
+<td width="40" align="right" valign="bottom"><img src="images/spacer.gif" alt="cscs_001" width="30" height="1" align="top"></td>
+<td colspan="2" align="left" valign="top"><div align="justify"><span class="bodytext_1"><img src="images/spacer.gif" alt="cscs_001" width="1" height="11" align="top"><br>
+<a class="item_title"
+   tal:attributes="href python:'/'.join(publication.getPhysicalPath())"
+   tal:content="publication/Title|nothing"/>
+<div tal:content="publication/getShortDescription|nothing"/>
+</span></div></td>
+<td width="30" align="left" valign="top"><img src="images/spacer.gif" alt="cscs_001" width="30" height="1" align="top"></td>
+</tr>
+</span>
+<tr><td colpspan=2><br/></td></tr>
+</span>
+</table>
+
+</div>

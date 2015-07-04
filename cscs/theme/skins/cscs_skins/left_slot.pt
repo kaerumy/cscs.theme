@@ -1,0 +1,13 @@
+<div metal:define-macro="portlet">
+
+<div style="margin-bottom:5px">
+  <metal:calendar use-macro="here/portlet_calendar/macros/portlet">
+    Calendar
+  </metal:calendar>
+
+  <metal:databox use-macro="here/databox_slot/macros/portlet">
+    Data Box
+  </metal:databox>
+</div>
+
+</div>

@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      i18n:domain="plone">
+
+<body>
+
+<!-- THE PATHBAR (breadcrumbs) DEFINITION -->
+<div metal:define-macro="portlet"
+     class="path_bar"
+     tal:define="breadcrumbs here/breadcrumbs_view/breadcrumbs;
+                 portal_url here/portal_url;
+                 absolute_url here/absolute_url;
+                 url_list python:absolute_url.replace(portal_url, '').split('/');">
+
+    <div tal:condition="not: isAnon">
+      &nbsp;&nbsp;
+      <span class="path_bar">You are logged in as <span class="user_name" tal:content="user/getUserName"/></span>
+    </div>
+    <br/><br/>
+    &nbsp;&nbsp;
+
+    <span tal:condition="python:len(breadcrumbs)>0" tal:omit-tag="">
+          <a class="path_bar"
+             tal:attributes="href portal_url">Home</a>
+          <span class="path_bar"> &raquo; </span>
+    </span>
+
+    <span class="path_bar"
+          tal:condition="python:len(breadcrumbs)==0">Home</span>
+
+    <span tal:repeat="crumb breadcrumbs">
+        <tal:crumb tal:define="is_last repeat/crumb/end;
+                               num repeat/crumb/number;
+                               title crumb/Title|nothing">
+            <a href="#" 
+               class="path_bar"
+               tal:condition="not: is_last"
+               tal:attributes="href python:portal_url + '/' + '/'.join(url_list[:num+1])"
+               tal:content="title"/>
+
+            <span class="path_bar" 
+                  tal:condition="not: is_last"> &raquo; </span>
+
+            <b tal:condition="is_last"
+               tal:content="title"/>
+         </tal:crumb>
+    </span>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<html metal:use-macro="here/main_template/macros/master">
+
+    <metal:fill fill-slot="main">
+      <div tal:define="academic_courses here/getCoursesFolderItems|nothing;
+                       announcements here/getAnnouncementsItems|nothing;
+                       databoxs here/getDataBoxItems|nothing;
+                       events here/getEventsItems|nothing;
+                       faqs here/getFAQsItems|nothing;
+                       fellowships here/getFellowshipsItems|nothing;
+                       irps here/getIRPItems|nothing;
+                       library_services here/getLibraryServices|nothing;
+                       media_services here/getMediaServices|nothing;
+                       publications here/getPublicationsItems|nothing;">
+
+<table cellspacing="5px" cellpadding="5px" width="95%">
+  <tr>
+    <td valign="top">
+        <div tal:condition="irps">
+          <br/><span class="head_1">IRPs</span><br/>
+          <div tal:repeat="obj irps">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>        
+        <div tal:condition="announcements">
+          <br/><span class="head_1">Announcements</span><br/>
+          <div tal:repeat="obj announcements">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+        <div tal:condition="faqs">
+          <br/><span class="head_1">Faqs</span><br/>
+          <div tal:repeat="obj faqs">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+        <div tal:condition="library_services">
+          <br/><span class="head_1">Library Services</span><br/>
+          <div tal:repeat="obj library_services">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+    </td>
+
+    <td valign="top">
+        <div tal:condition="academic_courses">
+          <br/><span class="head_1">Academic Courses</span><br/>
+          <div tal:repeat="obj academic_courses">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+         <div tal:condition="events">
+          <br/><span class="head_1">Events</span><br/>
+          <div tal:repeat="obj events">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+        <div tal:condition="media_services">
+          <br/><span class="head_1">Media Services</span><br/>
+          <div tal:repeat="obj media_services">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+    </td>
+
+    <td valign="top">
+        <div tal:condition="fellowships">
+          <br/><span class="head_1">Fellowships</span><br/>
+          <div tal:repeat="obj fellowships">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+        <div tal:condition="publications">
+          <br/><span class="head_1">Publications</span><br/>
+          <div tal:repeat="obj publications">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+        <div tal:condition="databoxs">
+          <br/><span class="head_1">Databox</span><br/>
+          <div tal:repeat="obj databoxs">
+            &bull; <a href="#" tal:attributes="href string:${obj/absolute_url}" target="_self" class="item_title" tal:content="obj/Title|nothing"/><br>
+          </div><br/><br/>
+        </div>
+        <div>
+            <br/><span class="head_1"></span><br/>
+            &bull; <a href="#" tal:attributes="href string:${here/portal_url}/calendar_view" target="_self" class="item_title">Calendar</a><br>
+            &bull; <a href="#" tal:attributes="href string:${here/portal_url}/feedback" target="_self" class="item_title">Feedback</a><br>
+            &bull; <a href="#" tal:attributes="href string:${here/portal_url}/contact" target="_self" class="item_title">Contact</a><br>
+            &bull; <a href="#" tal:attributes="href string:${here/portal_url}/archived" target="_self" class="item_title">Archived Items</a><br>
+        </div><br/><br/>
+     </td>
+  </tr>
+</table>
+
+      </div>
+    </metal:fill>
+
+</html>

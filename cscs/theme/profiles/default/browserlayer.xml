@@ -1,0 +1,6 @@
+<layers>
+ <layer
+     name="cscs.theme"
+     interface="cscs.theme.interfaces.IProductSpecific"
+     />
+</layers>

@@ -1,0 +1,51 @@
+<html metal:use-macro="here/main_template/macros/master">
+
+<div metal:fill-slot="main">
+
+  <span tal:define="year request/y|python:DateTime().strftime('%Y');
+                    month request/m|python:DateTime().strftime('%m');
+                    day request/d|python:DateTime().strftime('%d');
+                    date python:str(year) + '/' + str(month) + '/' + str(day);
+                    events python:here.getEvents(year, month, day);
+                    announcements python:here.getAnnouncements(year, month, day)">
+
+    <tal:condition tal:condition="not: python:events or announcements">
+      <div class="right_head" align="center">
+        No Events/Announcements on <span class="right_head" tal:content="python:DateTime(date).strftime('%d %B %Y')" />
+      </div>
+    </tal:condition>
+
+    <tal:condition tal:condition="events">
+      <span class="head_1">
+        Events on <span class="head_1" tal:content="python:DateTime(date).strftime('%d %B %Y')" />
+      </span><hr/>
+      <tal:events tal:repeat="obj events">
+        <a href=""
+           tal:attributes="href string:${obj/absolute_url}"
+           class="right_head"
+           tal:content="obj/Title|nothing"/><br/><br/>
+        Start Date : <span tal:content="obj/getStartDate|nothing" /><br/>
+        End Date : <span tal:content="obj/getEndDate|nothing" /><br/>
+        <b tal:content="obj/getShortDescription|nothing" /><hr/>
+      </tal:events>
+    </tal:condition>
+
+    <tal:condition tal:condition="announcements">
+      <span class="head_1">
+        Announcements on <span class="head_1" tal:content="python:DateTime(date).strftime('%d %B %Y')" />
+      </span><hr/>
+      <tal:announcements tal:repeat="obj announcements">
+        <a href=""
+           tal:attributes="href string:${obj/absolute_url}"
+           class="right_head"
+           tal:content="obj/Title|nothing"/><br/><br/>
+        Announcement Date : <span tal:content="obj/getAnnouncementDate|nothing" />
+        <b tal:content="obj/getShortDescription|nothing" /><hr/>
+      </tal:announcements>
+    </tal:condition>
+
+  </span>
+
+</div>
+
+</html>

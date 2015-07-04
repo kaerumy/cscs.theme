@@ -1,0 +1,67 @@
+<html metal:use-macro="here/main_template/macros/master">
+
+<div metal:fill-slot="main">
+
+  <div tal:define="submitted request/submit | nothing">
+    <div class="head_1">Send Mail To Admin</div><hr/>
+
+    <div tal:condition="submitted">
+      <div tal:content="structure here/sendMail"/>
+    </div>
+
+    <div tal:condition="not: submitted">
+  <form method="post" action="send_mail_form">
+  <table cellspacing="5px" cellpadding="5px">
+  <tr>
+      <td valign="top">
+        Full Name
+      </td>
+      <td>
+        <input name="fullname" size="40">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Email
+      </td>
+      <td>
+        <input name="email" size="40">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Contact Number
+      </td>
+      <td>
+        <input name="contact" size="40">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Subject
+      </td>
+      <td>
+        <input name="subject" size="40">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Message
+      </td>
+      <td>
+        <textarea cols="30" rows="6" name="message"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <br/><input type="submit" name="submit" value="Submit">
+      </td>
+    </tr>
+  </table>
+  </form>
+    </div>
+
+  </div>
+</div>
+
+</html>

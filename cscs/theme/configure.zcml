@@ -1,0 +1,39 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <include package="Products.CMFCore" file="permissions.zcml" />
+  <include package="plone.app.theming" />
+  <include package="collective.carousel"/>
+
+  <plone:static directory="static" type="theme" />
+
+  <include file="skins.zcml"/>
+
+  <genericsetup:registerProfile
+        name="default"
+        title="cscs.theme"
+        directory="profiles/default"
+        description=""
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+<!--
+  <browser:page
+      name="carousel-portlet-view"                  
+      for="Products.ATContentTypes.interface.IATImage"
+      template="carousel_image_tile.pt"
+      permission="zope2.View"
+      layer="cscs.theme.interfaces.IProductSpecific"
+      />-->
+
+    <browser:page 
+        for="Products.CSCS.interfaces.ICSCSContent"
+        name="carousel-portlet-view"
+        template="carousel_cscscontent_tile.pt"
+        permission="zope2.View"/>
+
+  <includeOverrides file="overrides.zcml"/>
+ 
+</configure>

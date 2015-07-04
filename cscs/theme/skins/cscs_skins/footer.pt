@@ -1,0 +1,148 @@
+<div metal:define-macro="portlet">
+  <table width="980" border="0" align="left" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="2" align="center" valign="top" class="bg_green">
+        <span class="navi_bot_pipe"><img src="images/spacer.gif" alt="cscs_001" width="1" height="4" align="top">
+          <br/>
+          <a href=""
+             tal:attributes="href here/portal_url"
+             target="_self"
+             class="navi_bot">Home</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/about">About CSCS</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/irps">Research Programmes</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/people">People @ CSCS</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/courses_folder">Courses</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/fellowships">Fellowships</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/calendar_view">Calendar</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/libraryservices">Library Services</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/mediaservices">Media Services</a>  |
+          <a href="#"
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/publications_folder">Publications</a>  |
+          <span class="navi_bot_pipe"
+                tal:condition="python:'Manager' in user.getRoles() or 'Owner' in user.getRoles()">
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/archived">Archived Items</a>
+          </span>
+
+          <br/>
+
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/search_form">Advanced Search</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/sitemap">Site Map</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/faqs">FAQ</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/terms_n_privacy_policy">Terms & Privacy Policy</a>  |
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/contact">Contact</a>  |
+          <!--a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/forum">Forum</a>  |-->
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/dataarchive">Data Archive</a>  |
+          <span class="navi_bot_pipe"
+                tal:condition="python:'Manager' in user.getRoles() or 'Owner' in user.getRoles()">
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/prefs_users_overview">Manage Users</a>
+          </span>
+          <!--a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/photo_album/photoalbum_view">Photo Album</a-->
+
+          <br/>
+
+          <span class="navi_bot_pipe"
+                tal:condition="python:'Manager' in user.getRoles() or 'Owner' in user.getRoles()">
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/prefs_groups_overview">Manage Groups</a>  |
+          </span>
+          <span class="navi_bot_pipe"
+                tal:condition="python:'Member' in user.getRoles() or 'Manager' in user.getRoles() or 'Reviewer' in user.getRoles()">
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/mailing_list_form">Mailing List</a>  |
+          </span>
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/send_mail_form">Send Mail</a>  |
+          <span class="navi_bot_pipe"
+                tal:condition="python:'Manager' in user.getRoles() or 'Owner' in user.getRoles()">
+          <a href=""
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/admin_email_id">Mail Config</a>  |
+          </span>
+          <a href="#"
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/announcements_folder">Announcements</a>  |
+          <a href="#"
+             target="_self"
+             class="navi_bot"
+             tal:attributes="href string:${here/portal_url}/events_folder">Events</a>  |
+          <a href="#"
+             target="_self"
+             class="navi_bot"
+             tal:condition="not: isAnon"
+             tal:attributes="href string:${here/portal_url}/password_form">Change Password</a>
+
+          <br/>
+
+          &copy; 2006 CSCS  | Created by
+          <a href="http://www.alteredblack.com" target="_blank" class="navi_bot">Altered Black</a>
+          <br/>
+          <img src="images/spacer.gif" alt="cscs_001" width="1" height="4" align="top">
+        </span>
+      </td>
+    </tr>
+  </table>
+</div>

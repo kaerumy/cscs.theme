@@ -1,0 +1,71 @@
+<div metal:define-macro="portlet">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Centre for the Study of Culture and Society</title>
+<link href="banner.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- begin: banner + top nav -->
+<div id="banner">
+  <div id="logo">
+    <a href="" tal:attributes="href string:${here/portal_url}">
+      <img src="images/logo_cscs.gif" alt="CSCS - Centre for the Study of Culture and Society" width="275" height="60" />
+    </a>
+  </div>
+  <div id="anniv"><img src="images/img_10anniv.gif" alt="" width="275" />
+    <div class="green">
+      <form id="search" name="searchform" method="post" action="search"
+            tal:define="livesearch site_properties/enable_livesearch|nothing;
+                        folder context/@@plone_context_state/folder;
+                        folder_path python:'/'.join(folder.getPhysicalPath())"
+            tal:attributes="action string:${portal_url}/search">
+        <input name="SearchableText"
+               class="srchfield"
+               type="text"
+               size="15"
+               value=""
+               title="Search Site"
+               accesskey="4"
+               i18n:attributes="title title_search_site;"
+               tal:attributes="value request/SearchableText|nothing;
+                               id python:test(livesearch, 'searchGadget', '')"
+               class="inputLabel" />
+        <input name="button" type="submit" class="searchButton" value="Search" />
+        <div class="LSResult" id="LSResult" style=""><div class="LSShadow" id="LSShadow"></div></div>
+      </form>
+    </div>
+    <div class="crvRt"><img src="images/spacer.gif" alt="" width="10" height="1" /></div>
+  </div>
+  <br clear="all" />
+</div>
+<div id="topNav">
+  <div class="gray">
+    <b class="linksLft">
+          <a href="" tal:attributes="href string:${here/portal_url}" target="_self">Home</a> 
+        | <a href="" tal:attributes="href string:${here/portal_url}/about" target="_self">About</a> 
+        | <a href="" tal:attributes="href string:${here/portal_url}/irps" target="_self">Research Programmes</a>
+        | <a href="" tal:attributes="href string:${here/portal_url}/people" target="_self">People @ CSCS</a> 
+        | <a href="" tal:attributes="href string:${here/portal_url}/courses_folder" target="_self">Courses</a> 
+        | <a href="" tal:attributes="href string:${here/portal_url}/fellowships" target="_self">Fellowships</a>
+    </b>
+    <b class="linksRt">
+          <a href="" tal:attributes="href string:${here/portal_url}/sitemap">Sitemap</a>
+        | <a href="" tal:attributes="href string:${here/portal_url}/faqs" target="_self">FAQ</a> 
+        | <a href="" tal:attributes="href string:${here/portal_url}/contact" target="_self">Contact</a> 
+        | <b tal:condition="isAnon">
+          <a href="" style="color: #fff;" tal:attributes="href string:${here/portal_url}/login_form" target="_self">Login</a>
+        </b>
+        <b tal:condition="not: isAnon">
+          <a href="" style="color: #fff;" tal:attributes="href string:${here/portal_url}/logout" target="_self">Logout</a>
+        </b>
+    </b>
+    <br clear="all" />
+  </div>
+</div>
+<br/><br/>
+<!-- end: banner + top nav -->
+</body>
+</html>
+</div>

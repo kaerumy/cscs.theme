@@ -1,0 +1,163 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="plone">
+
+<body>
+
+<div metal:define-macro="portlet"
+     tal:omit-tag=""
+     tal:define="DateTime python:modules['DateTime'].DateTime;
+                 current python:DateTime();
+                 yearmonth here/getYearAndMonthToDisplay;
+                 year python:yearmonth[0];
+                 month python:yearmonth[1];
+                 prevMonthTime python:here.getPreviousMonth(month, year);
+                 nextMonthTime python:here.getNextMonth(month, year);
+                 weeks python:here.portal_calendar.getEventsForCalendar(month, year);
+                 anchor_url request/anchor_url | here_url;
+                 anchor_method request/anchor_method | template/getId;
+                 event_days python:here.hasAnyEventsOrAnnouncements(year, month, day='01');">
+    <!-- The calendar, rendered as a table -->
+
+  <script language="javascript">
+  function showEvents(block_name)
+  {
+    document.getElementById(block_name).style.display= 'block';
+    document.getElementById(block_name).style.visibility= 'visible';
+  }
+  function hideEvents(block_name)
+  {
+    document.getElementById(block_name).style.display= 'none';
+    document.getElementById(block_name).style.visibility= 'hidden';
+  }
+  </script>
+
+    <table border=0 cellspacing="0" class="ploneCalendar" width="180px">
+        <thead>
+            <tr>
+                <th id="calendar-previous">
+                    <a href="#" class="arrow" 
+                       tal:attributes="href python:'%s?month:int=%d&amp;year:int=%d' % (portal_url, prevMonthTime.month(),prevMonthTime.year())">&laquo;</a>
+                </th>
+                <th colspan="5"
+                    tal:define="date python:DateTime(year, month, 1);">
+                    <span i18n:translate="" tal:omit-tag="">
+                      <a href=""
+                         class="item_title"
+                         tal:attributes="href string:${here/portal_url}/calendar_view">
+                        <span i18n:name="monthname">
+                            <b i18n:translate=""
+                               tal:define="monthstring python:date.strftime('%B').capitalize();"
+                               tal:attributes="id string:calendar-month-$monthstring"
+                               tal:content="string:$monthstring"
+                               id="calendar-month-month">&nbsp;</b>
+                        </span>
+                        <b i18n:name="year"
+                           tal:define="year python:date.year()"
+                           tal:content="string:$year"
+                           tal:attributes="id string:calendar-year-$year;"
+                           id="calendar-year">&nbsp;</b>
+                      </a>
+                    </span>
+                 </th>
+                <th id="calendar-next">
+                    <a href="#" class="arrow" tal:attributes="href python:'%s?month:int=%d&amp;year:int=%d' % (portal_url, nextMonthTime.month(),nextMonthTime.year())">&raquo;</a>
+                </th>
+            </tr>
+            <tr tal:define="weekdays here/portal_calendar/getDays" class="weekdays">
+                <tal:block repeat="weekday weekdays">                        
+                    <td>
+                        <span tal:condition="python:weekday in ['Su', 'Sa']">
+                            <b style="color: #FF0000" tal:content="weekday" />
+                        </span>
+                        <span tal:condition="python:weekday not in ['Su', 'Sa']">
+                            <b tal:content="weekday" />
+                        </span>
+                    </td>
+               </tal:block>
+            </tr>
+        </thead>
+        <tbody>
+            <tr tal:repeat="week weeks" align="center">
+              <tal:block repeat="day week">
+                <tal:block define="daynumber day/day;
+                                   datestring python: '%d%0.2d%0.2d' % (year, month, daynumber);
+                                   javascriptstring string:javascript:%sDay('%s');">
+                  <tal:condition tal:condition="daynumber"
+                                 tal:define="events_or_announcements python:daynumber in event_days">
+                    <span tal:condition="python:events_or_announcements">
+                      <td tal:condition="python: current.year()==year and current.month()==month and current.day()==int(daynumber)" align="center">
+                        <a href="" 
+                           tal:attributes="href string:${here/portal_url}/calendar_view?y=$year&m=$month&d=$daynumber;
+                                           onMouseOver python:'javascript:showEvents(\'day%d%0.2d%0.2d\')' % (year, month, daynumber);
+                                           onMouseOut python:'javascript:hideEvents(\'day%d%0.2d%0.2d\')' % (year, month, daynumber)">
+                          <div class="today" tal:content="python: daynumber or default" />
+                        </a>
+                      </td>
+                      <td tal:condition="not: python: current.year()==year and current.month()==month and current.day()==int(daynumber)" align="center">
+                        <a href=""
+                           tal:attributes="href string:${here/portal_url}/calendar_view?y=$year&m=$month&d=$daynumber;
+                                           onMouseOver python:'javascript:showEvents(\'day%d%0.2d%0.2d\')' % (year, month, daynumber);
+                                           onMouseOut python:'javascript:hideEvents(\'day%d%0.2d%0.2d\')' % (year, month, daynumber)">
+                          <div tal:define="wday python:DateTime(year, month, daynumber).strftime('%w')"
+                               tal:attributes="class python:test(events_or_announcements, 'events_or_announcements', None)">
+                            <span tal:condition="python:wday in ['0', '6']"
+                                  style="color:#FF0000"
+                                  tal:content="python:daynumber or default"/>
+                            <span tal:condition="python:wday not in ['0', '6']"
+                                  tal:content="python:daynumber or default"/>
+                          </div>
+                        </a>
+                      </td>
+                    </span>
+
+                    <span tal:condition="not: python:events_or_announcements">
+                      <td tal:condition="python: current.year()==year and current.month()==month and current.day()==int(daynumber)"
+                          tal:content="python: daynumber or default" class="today" align="center">
+                        &nbsp;
+                      </td>
+                      <td tal:condition="not: python: current.year()==year and current.month()==month and current.day()==int(daynumber)" align="center">
+                        <div tal:define="wday python:DateTime(year, month, daynumber).strftime('%w')">
+                          <span tal:condition="python:wday in ['0', '6']"
+                                style="color:#FF0000"
+                                tal:content="python:daynumber or default"/>
+                          <span tal:condition="python:wday not in ['0', '6']"
+                                tal:content="python:daynumber or default"/>
+                        </div>
+                      </td>
+                    </span>
+                  </tal:condition>
+                  <tal:condition tal:condition="not: daynumber">
+                    <td align="center">&nbsp;</td>
+                  </tal:condition>
+                </tal:block>
+              </tal:block>
+            </tr>
+        </tbody>
+    </table>
+
+    <tal:week repeat="week weeks">
+      <tal:day repeat="day week">
+        <tal:block define="daynumber day/day">
+          <tal:condition tal:condition="daynumber">
+           <span tal:condition="python:daynumber in event_days">
+            <div tal:define="items python:here.getCalendarItems('%d/%0.2d/%0.2d' % (year, month, daynumber))"
+                 tal:condition="items"
+                 tal:attributes="id python:'day%d%0.2d%0.2d' % (year, month, daynumber)"
+                 class="calendar_item"
+                 style="display:none"><br/>
+              <div tal:repeat="item items">
+                <b tal:content="item/Title|nothing"/>
+                <div tal:content="item/getShortDescription|nothing"/><br/>
+              </div> 
+            </div> 
+           </span>
+          </tal:condition>
+        </tal:block>
+      </tal:day>
+    </tal:week>
+</div>
+
+</body>
+
+</html>

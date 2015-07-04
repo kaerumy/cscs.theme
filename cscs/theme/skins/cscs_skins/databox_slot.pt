@@ -1,0 +1,26 @@
+<div metal:define-macro="portlet">
+
+<div tal:define="objs here/getDataBoxItems|nothing">
+
+<span tal:condition="objs">
+<hr/>
+<div style="height:300px; width:180px; overflow:auto;">
+  <div tal:repeat="obj objs">
+    <a class="item_title"
+       tal:attributes="href string:${obj/absolute_url}"
+       tal:content="obj/Title|nothing"/>
+    <div tal:content="obj/getShortDescription|nothing"/>
+    <hr/>
+  </div>
+</div>
+<hr/>
+</span>
+
+<span tal:condition="not: objs">
+<div style="height:200px; width:180px; overflow:auto;">
+</div>
+</span>
+
+</div>
+
+</div>

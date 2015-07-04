@@ -1,0 +1,17 @@
+## Script (Python) "copy_of_canView"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=member='karthick'
+##title=
+##
+user = context.portal_membership.getAuthenticatedMember()
+
+if 1:
+  if user.has_permission('View', context.Members[member]):
+     return True
+
+
+return False

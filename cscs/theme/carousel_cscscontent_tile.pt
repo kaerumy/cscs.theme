@@ -1,0 +1,21 @@
+<div class="itemPadding"> 
+    <div class="leadimagetile">
+        <h2 class="tileHeadline">
+            <a class="summary url"
+                tal:attributes="href context/absolute_url"
+                tal:content="context/Title"
+                ></a>
+        </h2>
+
+        <p class="tileBody">
+            &nbsp;
+            <span class="description" tal:content="context/Description"></span>
+        </p>
+        <p class="tileFooter">
+            <a tal:attributes="href context/absolute_url">
+                Read More…
+            </a>
+        </p>
+    </div>
+
+</div>

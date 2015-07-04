@@ -1,0 +1,15 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
+
+  <browser:page
+      name="carousel-portlet-view"                  
+      for="Products.ATContentTypes.interface.IATImage"
+      template="carousel_image_tile.pt"
+      permission="zope2.View"
+      layer="collective.carousel.interfaces.ICollectiveCarouselLayer"
+      />
+ 
+</configure>
